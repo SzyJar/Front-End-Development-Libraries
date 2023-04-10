@@ -4,7 +4,7 @@ import { useState } from "https://cdn.skypack.dev/react@17.0.1";
 import "https://cdnjs.cloudflare.com/ajax/libs/marked/2.0.3/marked.min.js";
 
 function ReactApp() {
-  const [markdown, setMarkdown] = useState(`# Markdown Previewer
+  const [markdown, setMarkdown] = useState((`# Markdown Previewer
 
 ## Introduction
 
@@ -45,8 +45,8 @@ This text is **bold**.
 
 #### Blockquote Example
 
-> The best way to predict the future is to create it.`);
-
+> The best way to predict the future is to create it.`));
+  
   function handleChange(event) {
     setMarkdown(event.target.value);
   }
@@ -54,13 +54,13 @@ This text is **bold**.
     const html = marked(markdown, { breaks: true });
     return { __html: html };
   };
-
-  return /*#__PURE__*/(
-    React.createElement("div", null, /*#__PURE__*/
-    React.createElement("textarea", { id: "editor", onChange: handleChange, value: markdown }), /*#__PURE__*/
-    React.createElement("div", { className: "Preview", id: "preview", dangerouslySetInnerHTML: renderMarkdown() })));
-
-
+  
+  return(
+    <div>
+      <textarea id="editor" onChange={handleChange} value={markdown} />
+      <div className="Preview" id="preview" dangerouslySetInnerHTML={renderMarkdown()} />
+    </div>
+  );
 }
 
-ReactDOM.render( /*#__PURE__*/React.createElement(ReactApp, null), document.getElementById("root"));
+ReactDOM.render(<ReactApp />, document.getElementById("root"));
